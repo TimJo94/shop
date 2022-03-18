@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добро Пожаловать</title>
+</head>
+<body>
+    <h1>Главная страница</h1>
+
+    {% for cat in categories %}
+        <p>{{ cat.name }}</p>
+    {% endfor %}
+</body>
+</html>
