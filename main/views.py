@@ -1,5 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import ListView, DetailView
+
 from .models import Category, Product
 
 
@@ -10,6 +13,19 @@ def index_page(request):
 
 
 
+class ProductsListView(View):
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, 'main/products_list.html', {'products': products})
+
+
+class ProductDetailsView(DetailView):
+    queryset = Product.objects.all()
+    template_name = 'main/product_details.html'
+
+# class ProductsListView(ListView):
+#     queryset = Product.objects.all()
+#     template_name = 'main/products_list.html'
 
 # TODO: сделать список продуктов
 # TODO: авторизация
