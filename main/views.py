@@ -27,6 +27,7 @@ class ProductDetailsView(DetailView):
 #     queryset = Product.objects.all()
 #     template_name = 'main/products_list.html'
 
+# TODO: сделать переходы между страницами
 # TODO: сделать список продуктов
 # TODO: авторизация
 # TODO: фильтрация, поиск, пагинация
