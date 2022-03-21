@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Добро Пожаловать</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} My Site {% endblock title %}
+
+{% block body %}
     <h1>Главная страница</h1>
 
     {% for cat in categories %}
-        <p>{{ cat.name }}</p>
+        <p><a href="{% url 'products-list' cat.slug %}" >{{ cat.name }}</a></p>
+
     {% endfor %}
-</body>
-</html>
+{% endblock body %}

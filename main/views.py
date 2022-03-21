@@ -11,11 +11,9 @@ def index_page(request):
     return render(request, 'main/index.html', {'categories': categories})
 
 
-
-
 class ProductsListView(View):
-    def get(self, request):
-        products = Product.objects.all()
+    def get(self, request, category_id):
+        products = Product.objects.filter(category_id=category_id)
         return render(request, 'main/products_list.html', {'products': products})
 
 
