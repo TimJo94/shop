@@ -8,6 +8,13 @@
 <body>
 <nav class="py-2 bg-light border-bottom">
     <div class="container d-flex flex-wrap">
+      {% if user.is_staff %}
+        <ul class="nav me-auto">
+          <li class="nav-item">
+            <a href="{% url 'create-product' %}" class="nav-link">Добавить новый продукт</a>
+          </li>
+        </ul>
+      {% endif %}
       <ul class="nav">
         {% if user.is_authenticated %}
           <li class="nav-item"><a href="{% url 'signout' %}" class="nav-link link-dark px-2">Здравствуйте, {{ user.name }}   Выйти</a></li>
