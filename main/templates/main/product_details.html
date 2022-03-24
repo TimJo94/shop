@@ -6,11 +6,12 @@
     <p>{{ product.description }}</p>
     <p>{{ product.price }}</p>
     <p><img src="{{ product.image.url }}" width="300" height="300"></p>
-
+    {% include 'add_to_cart_form.html' with product=product %}
     {% if user.is_authenticated and user.is_staff %}
        <p>
            <a href="{% url 'update-product' product.id %}">Редактировать</a> или
            <a href="{% url 'delete-product' product.id %}">Удалить</a>
+
        </p>
     {% endif %}
 {% endblock body %}

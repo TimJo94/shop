@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Корзина{% endblock title %}
+{% block body %}
+<h2>Ваша корзина:</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Изображение</th>
+    <th scope="col">Наименование</th>
+    <th scope="col">Цена за единицу</th>
+    <th scope="col">Количество</th>
+    <th scope="col">Сумма</th>
+    <th scope="col">Удалить</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for item in cart %}
+    <tr>
+      <td>
+        <img src="{{ item.product.image.url }}" width="100"; height="100";>
+      </td>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.price }}</td>
+      <td>
+        {{ item.quantity }}
+        <a href="{% url 'increment-quantity' item.product.id %}">
+          <button type="button">+</button>
+        </a>
+      </td>
+      <td>{{ item.item_total }}</td>
+      <td>
+        <a href="{% url 'remove-from-cart' item.product.id %}">X</a>
+      </td>
+    </tr>
+  {% endfor %}
+  <tr>
+    <td colspan="4"><strong>Общая сумма:</strong></td>
+    <td colspan="2">{{ cart.get_cart_total }}</td>
+  </tr>
+  </tbody>
+</table>
+{% endblock body %}

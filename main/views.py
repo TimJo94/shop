@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from order.forms import AddToCartForm
 from .models import Category, Product
 from .forms import CreateProductForm, UpdateProductForm
 
@@ -16,12 +17,18 @@ def index_page(request):
 class ProductsListView(View):
     def get(self, request, category_id):
         products = Product.objects.filter(category_id=category_id)
-        return render(request, 'main/products_list.html', {'products': products})
+        cart_form = AddToCartForm()
+        return render(request, 'main/products_list.html', {'products': products, 'cart_form': cart_form})
 
 
 class ProductDetailsView(DetailView):
     queryset = Product.objects.all()
     template_name = 'main/product_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['cart_form'] = AddToCartForm()
+        return context
 
 
 #доступ только для администраторов
