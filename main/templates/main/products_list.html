@@ -4,6 +4,18 @@
 
 {% block body %}
     <h1>Список продуктов</h1>
+
+    <form method="get">
+        <div class="col-3">
+            <input type="number" placeholder="Цена от..." class="form-control" name="price_from">
+        </div>
+        <div class="col-3">
+            <input type="number" placeholder="Цена до..." class="form-control" name="price_to">
+        </div>
+        <button class="btn" type="submit">Фильтровать</button>
+    </form>
+
+
     {% for prod in products %}
         <p>{{ prod.id }}</p>
         <p><a href="{% url 'product-details' prod.id %}" >{{ prod.name }}</a></p>
@@ -12,4 +24,17 @@
         <p>-----------------</p>
     {% endfor %}
 
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if products.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        <li class="page-item disabled"><a class="page-link">{{ products.number }} of {{ products.paginator.num_pages }}</a></li>
+
+        {% if products.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
 {% endblock body %}

@@ -51,6 +51,7 @@ class Cart:
 
     def increment_quantity(self, product_id):
         product_id = str(product_id)
+        print(product_id)
         if product_id in self.cart:
             if self.cart[product_id]['quantity'] < 20:
                 self.cart[product_id]['quantity'] += 1

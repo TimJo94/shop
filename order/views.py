@@ -35,7 +35,7 @@ class CartDetailsView(View):
 class IncrementQuantityView(View):
     def get(self, request, product_id):
         cart = Cart(request)
-        product_id = get_object_or_404(Product, id=product_id)
+        product = get_object_or_404(Product, id=product_id)
         cart.increment_quantity(product_id)
         return redirect(reverse_lazy('cart-details'))
 
