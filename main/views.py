@@ -1,19 +1,19 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.paginator import Paginator, InvalidPage
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from order.forms import AddToCartForm
-from .models import Category, Product
+
+from .models import Product, Category
 from .forms import CreateProductForm, UpdateProductForm
 
 
 def index_page(request):
-    categories = Category.objects.all()
-    return render(request, 'main/index.html', {'categories': categories})
+    products = Product.objects.all()[:6]
+    return render(request, 'main/index.html', {'products': products})
 
 
 class ProductsListView(View):
@@ -27,11 +27,12 @@ class ProductsListView(View):
         return products
 
     def get(self, request, category_id):
+        category = get_object_or_404(Category, slug=category_id)
         products = Product.objects.filter(category_id=category_id)
         products = self.filter_queryset(products)
         products = self.paginate_queryset(products)
-        cart_form = AddToCartForm()
-        return render(request, 'main/products_list.html', {'products': products, 'cart_form': cart_form})
+        return render(request, 'main/products_list.html', {'products': products,
+                                                           'category': category})
 
     def paginate_queryset(self, products):
         page_number = self.request.GET.get('page')
@@ -43,15 +44,9 @@ class ProductsListView(View):
         return page
 
 
-
 class ProductDetailsView(DetailView):
     queryset = Product.objects.all()
     template_name = 'main/product_details.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['cart_form'] = AddToCartForm()
-        return context
 
 
 #доступ только для администраторов
@@ -102,12 +97,6 @@ class SearchResultsView(ListView):
         queryset = queryset.filter(Q(name__icontains=q) | Q(description__icontains=q))
         # select * from product where name ilike'%q%' OR description ilike '%q%';
         return queryset
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        # context is data that you pass from views into html
-        context['cart_form'] = AddToCartForm()
-        return context
 
 
 # class ProductsListView(ListView):

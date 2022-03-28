@@ -1,17 +1,171 @@
 {% extends 'base.html' %}
-{% block title %}{{ product.name }}{% endblock title %}
-{% block body %}
-    <p>{{ product.id }}</p>
-    <p>{{ product.name }}</p>
-    <p>{{ product.description }}</p>
-    <p>{{ product.price }}</p>
-    <p><img src="{{ product.image.url }}" width="300" height="300"></p>
-    {% include 'add_to_cart_form.html' with product=product %}
-    {% if user.is_authenticated and user.is_staff %}
-       <p>
-           <a href="{% url 'update-product' product.id %}">Редактировать</a> или
-           <a href="{% url 'delete-product' product.id %}">Удалить</a>
 
-       </p>
-    {% endif %}
-{% endblock body %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block body %}
+<!-- ********************** -->
+  <!--      C O N T E N T     -->
+  <!-- ********************** --> 
+  <div id="content" class="product_view container_16">
+
+    <div id="product" class="grid_12">
+      <div id="product_images" class="grid_6 alpha">
+      	<a id="product_image_preview" rel="prettyPhoto[gallery]"><img id="image" src="{{ product.image.url }}" title="{{ product.name }}" alt="{{ product.name }}" width="300" height="300" /></a>
+      </div>
+      <div id="product_info" class="grid_6 omega">
+        <p class="s_price">{{ product.price|floatformat:"0g" }}<span class="s_currency s_after"> сом</span></p>
+        <dl class="clearfix">
+          <dt>Availability</dt>
+          <dd>In Stock</dd>
+          <dt>Model</dt>
+          <dd>Product 4</dd>
+          <dt>Manufacturer</dt>
+          <dd><a href="#">Canon</a></dd>
+          <dt>Average Rating</dt>
+          <dd>
+            <p class="s_rating s_rating_5"><span style="width: 100%;" class="s_percent"></span></p>
+          </dd>
+        </dl>
+        <div id="product_share" class="clearfix">
+          <!-- AddThis Button BEGIN -->
+          <div class="addthis_toolbox addthis_default_style ">
+          <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+          <a class="addthis_button_tweet"></a>
+          <a class="addthis_counter addthis_pill_style"></a>
+          </div>
+          <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4de0eff004042e7a"></script>
+          <!-- AddThis Button END -->
+        </div>
+        <div id="product_options">
+          <h3>Available Options</h3>
+          <label for="option_Memory">Memory</label>
+          <select id="option_Memory">
+            <option value="676">1 GB +29.38<span class="s_currency s_after"> eur</span> </option>
+            <option value="677">2 GB +47.00<span class="s_currency s_after"> eur</span> </option>
+          </select>
+          <span class="clear"></span>
+        </div>
+        <div id="product_buy" class="clearfix">
+            {% include 'add_to_cart_form.html' with product=product %}
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="s_tabs grid_12 alpha omega">
+        <ul class="s_tabs_nav clearfix">
+          <li><a href="#product_description">Description</a></li>
+          <li><a href="#product_reviews">Reviews (1)</a></li>
+          <li><a href="#product_gallery">Photos (2)</a></li>
+        </ul>
+        <div class="s_tab_box">
+        
+          <div id="product_description">
+            <div class="cpt_product_description ">
+                {{ product.description }}
+            </div>
+            <!-- cpt_container_end -->
+          </div>
+          
+<!--          <div id="product_reviews" class="s_listing">-->
+<!--            <div class="s_review last">-->
+<!--              <p class="s_author"><strong>Shoppica</strong><small>(29/03/2011)</small></p>-->
+<!--              <div class="right">-->
+<!--                <div class="s_rating_holder">-->
+<!--                  <p class="s_rating s_rating_5"><span class="s_percent" style="width: 100%;"></span></p>-->
+<!--                  <span class="s_average">5 out of 5 Stars!</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="clear"></div>-->
+<!--              <p>Vestibulum molestie tellus rhoncus nulla cursus quis dictum orci laoreet! metus. Vestibulum molestie tellus rhoncus nulla cursus quis dictum orci laoreet! metus.</p>-->
+<!--            </div>-->
+<!--            <div class="pagination"><div class="results">Showing 1 to 1 of 1 (1 Pages)</div></div>-->
+<!--            <h2 class="s_title_1"><span class="s_main_color">Write</span> Review</h2>-->
+<!--            <div id="review_title" class="clear"></div>-->
+<!--            <div class="s_row_3 clearfix">-->
+<!--              <label><strong>Your Name:</strong></label>-->
+<!--              <input type="text" />-->
+<!--            </div>-->
+<!--            <div class="s_row_3 clearfix">-->
+<!--              <label><strong>Your Review:</strong></label>-->
+<!--              <textarea style="width: 98%;" rows="8"></textarea>-->
+<!--              <p class="s_legend"><span style="color: #FF0000;">Note:</span> HTML is not translated!</p>-->
+<!--            </div>-->
+<!--            <div class="s_row_3 clearfix">-->
+<!--              <label><strong>Rating</strong></label>-->
+<!--              <span class="clear"></span> <span>Bad</span>&nbsp;-->
+<!--              <input type="radio" />-->
+<!--              &nbsp;-->
+<!--              <input type="radio" />-->
+<!--              &nbsp;-->
+<!--              <input type="radio" />-->
+<!--              &nbsp;-->
+<!--              <input type="radio" />-->
+<!--              &nbsp;-->
+<!--              <input type="radio" />-->
+<!--              &nbsp; <span>Good</span>-->
+<!--            </div>-->
+<!--            <span class="clear border_ddd"></span>-->
+<!--            <a class="s_button_1 s_main_color_bgr"><span class="s_text">Continue</span></a> <span class="clear"></span>-->
+<!--          </div>-->
+<!--            -->
+<!--          <div id="product_gallery">-->
+<!--            <ul class="s_thumbs clearfix">-->
+<!--              <li><a class="s_thumb" href="images/dummy/pic_2.jpg" title="Leica M7" rel="prettyPhoto[gallery]"><img src="images/dummy/pic_2.jpg" width="120" title="Leica M7" alt="Leica M7" /></a></li>-->
+<!--              <li><a class="s_thumb" href="images/dummy/pic_3.jpg" title="Leica M7" rel="prettyPhoto[gallery]"><img src="images/dummy/pic_3.jpg" width="120" title="Leica M7" alt="Leica M7" /></a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+        </div>
+      </div>
+      
+
+      
+    </div>
+
+
+    
+    <div id="right_col" class="grid_3">
+      
+      <div id="categories_module" class="s_box">
+        <h2>Categories</h2>
+        <div class="s_list_1">
+          <ul>
+          	<li>
+            	<a href="listing_1.html"><b>Electronics</b></a>
+            	<ul>
+              	<li><a href="listing_1.html">Digital Cameras</a></li>
+                <li><a href="listing_1.html">Home Audio</a></li>
+                <li><a href="listing_1.html">Home Cinema</a></li>
+                <li><a href="listing_1.html">Cell Phones</a></li>
+                <li><a href="listing_1.html">MP3 Players</a></li>
+                <li><a href="listing_1.html">Car-Audio</a></li>
+              </ul>
+            </li>
+            <li><a href="listing_1.html">Computers</a></li>
+            <li><a href="listing_1.html">Clothing</a></li>
+            <li><a href="listing_1.html">Shoes</a></li>
+            <li><a href="listing_1.html">Gifts</a></li>
+            <li><a href="listing_1.html">At home</a></li>
+            <li><a href="listing_1.html">Health</a></li>
+            <li><a href="listing_1.html">Jewellery</a></li>
+            <li><a href="listing_1.html">Books</a></li>
+          </ul>
+      	</div>
+			</div>
+    
+      <div id="information_module" class="s_box">
+        <h2>Information</h2>
+        <ul class="s_list_1">
+          <li><a href="static.html">About Shoppica</a></li>
+          <li><a href="static.html">Privacy Policy</a></li>
+          <li><a href="static.html">Terms &amp; Conditions</a></li>
+          <li><a href="contacts.html">Contact Us</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </div>
+
+
+    </div>
+    
+  </div>
+  <!-- end of content -->
+  {% endblock body %}

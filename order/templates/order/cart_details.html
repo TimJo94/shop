@@ -1,42 +1,83 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}Корзина{% endblock title %}
+
 {% block body %}
-<h2>Ваша корзина:</h2>
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">Изображение</th>
-    <th scope="col">Наименование</th>
-    <th scope="col">Цена за единицу</th>
-    <th scope="col">Количество</th>
-    <th scope="col">Сумма</th>
-    <th scope="col">Удалить</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for item in cart %}
-    <tr>
-      <td>
-        <img src="{{ item.product.image.url }}" width="100"; height="100";>
-      </td>
-      <td>{{ item.product.name }}</td>
-      <td>{{ item.price }}</td>
-      <td>
-        {{ item.quantity }}
-        <a href="{% url 'increment-quantity' item.product.id %}">
-          <button type="button">+</button>
-        </a>
-      </td>
-      <td>{{ item.item_total }}</td>
-      <td>
-        <a href="{% url 'remove-from-cart' item.product.id %}">X</a>
-      </td>
-    </tr>
-  {% endfor %}
-  <tr>
-    <td colspan="4"><strong>Общая сумма:</strong></td>
-    <td colspan="2">{{ cart.get_cart_total }}</td>
-  </tr>
-  </tbody>
-</table>
+  <!-- ********************** -->
+  <!--     I N T R O          -->
+  <!-- ********************** -->
+  <div id="intro">
+    <div id="intro_wrap">
+      <div class="container_12">
+        <div id="breadcrumbs" class="grid_12">
+          <a href="{% url 'index' %}">Главная</a>
+           &gt; <a href="{% url 'cart-details' %}">Корзина</a>
+        </div>
+        <h1>Ваша корзина:</h1>
+      </div>
+    </div>
+  </div>
+  <!-- end of intro -->
+
+
+  <!-- ********************** -->
+  <!--      C O N T E N T     -->
+  <!-- ********************** -->
+  <div id="content" class="container_12">
+
+    <div id="shopping_cart" class="grid_12">
+
+      <form id="cart" class="clearfix">
+        <table class="s_table_1" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+            <th width="60">Изображение</th>
+            <th width="320">Наименование</th>
+            <th>Цена за единицу</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+            <th width="65">Удалить</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+              <tr class="even">
+                <td valign="middle">
+                  <a href="{% url 'product-details' item.product.id %}">
+                    <img src="{{ item.product.image.url }}" width="60" height="60" alt="{{ item.product.name }}" />
+                  </a>
+                </td>
+                <td valign="middle">
+                  <a href="{% url 'product-details' item.product.id %}">{{ item.product.name }}</a>
+                </td>
+                <td valign="middle">{{ item.price }}</td>
+                <td valign="middle">{{ item.quantity }}</td>
+                <td valign="middle">{{ item.item_total }}</td>
+                <td valign="middle">
+                  <a href="{% url 'remove-from-cart' item.product.id %}">X</a>
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br />
+        <p class="s_total s_secondary_color last"><strong>Total:</strong> {{ cart.get_cart_total }}<span class="s_currency s_after"> сом</span></p>
+
+        <div class="clear"></div>
+        <br />
+
+        <a class="s_button_1 s_ddd_bgr left"><span class="s_text">Continue Shopping</span></a>
+        <button class="s_button_1 s_main_color_bgr" type="submit"><span class="s_text">Checkout</span></button>
+        <a class="s_button_1 s_main_color_bgr"><span class="s_text">Update</span></a>
+      </form>
+
+    </div>
+
+    <div class="clear"></div>
+    <br />
+    <br />
+
+  </div>
+  <!-- end of content -->
 {% endblock body %}

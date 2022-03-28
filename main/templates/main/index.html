@@ -1,12 +1,173 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %} My Site {% endblock title %}
+{% block title %}Добро Пожаловать{% endblock title %}
 
 {% block body %}
-    <h1>Главная страница</h1>
+  <!-- ********************** -->
+  <!--     I N T R O          -->
+  <!-- ********************** -->
+  <div id="intro">
+    <div id="intro_wrap">
+      <div id="product_intro" class="container_12">
+        <div id="product_intro_info" class="grid_5">
+          <div style="position: relative;">
+            <h2><a href="product.html">Samsung SyncMaster 941BW</a></h2>
+            <div class="s_rating_holder">
+              <p class="s_rating s_rating_big s_rating_5"> <span style="width: 60%;" class="s_percent"></span> </p>
+              <span class="s_average">3 out of 5</span> </div>
+            <p class="s_desc"> Imagine the advantages of going big without slowing down. The big 19&quot; 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver th...</p>
+            <div class="s_price_holder">
+              <p class="s_price"> <span class="s_currency s_before">$</span>384.67 </p>
+            </div>
+          </div>
+          <div style="position: relative; display: none;">
+            <h2><a href="product.html">White football trainers</a></h2>
+            <p class="s_desc"> Product 8 ...</p>
+            <div class="s_price_holder">
+              <p class="s_price"> <span class="s_currency s_before">$</span>192.34 </p>
+            </div>
+          </div>
+          <div style="position: relative; display: none;">
+            <h2><a href="product.html">Balenciaga Paris</a></h2>
+            <p class="s_desc"> Intel Core 2 Duo processor Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever 1GB memory, larger hard drives The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for runni...</p>
+            <div class="s_price_holder">
+              <p class="s_price"> <span class="s_currency s_before">$</span>961.68 </p>
+            </div>
+          </div>
+          <div style="position: relative; display: none;">
+            <h2><a href="product.html">Adidas Acqua</a></h2>
+            <p class="s_desc"> Product 8 Morbi malesuada, ante sit amet faucibus pharetra, ipsum ante imperdiet tellus, nec placerat metus sem sed magna. Quisque id urna a metus porttitor tristique et at justo. Praesent non enim in elit sagittis feugiat. Integer in lectus lobortis lacus commodo mattis non auctor metus. Sus...</p>
+            <div class="s_price_holder">
+              <p class="s_price"> <span class="s_currency s_before">$</span>192.34 </p>
+            </div>
+          </div>
+          <div style="position: relative; display: none;">
+            <h2><a href="product.html">Panasonic Lumix</a></h2>
+            <p class="s_desc"> Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agilit...</p>
+            <div class="s_price_holder">
+              <p class="s_price"> <span class="s_currency s_before">$</span>153.87 </p>
+            </div>
+          </div>
+        </div>
+        <div id="product_intro_preview">
+          <div class="slides_container">
+            <div class="slideItem" style="display: none"><a href="#"><img src="{% static 'images/dummy/pic_1.jpg' %}" alt="" /></a></div>
+            <div class="slideItem" style="display: none"><a href="#"><img src="{% static 'images/dummy/pic_2.jpg' %}" alt=""  /></a></div>
+            <div class="slideItem" style="display: none"><a href="#"><img src="{% static 'images/dummy/pic_3.jpg' %}" alt="" /></a></div>
+            <div class="slideItem" style="display: none"><a href="#"><img src="{% static 'images/dummy/pic_4.jpg' %}" alt="" /></a></div>
+            <div class="slideItem" style="display: none"><a href="#"><img src="{% static 'images/dummy/pic_5.jpg' %}" alt="" /></a></div>
+          </div>
+          <a class="s_button_prev" href="javascript:;"></a>
+          <a class="s_button_next" href="javascript:;"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+	<script type="text/javascript" src="{% static 'js/jquery/jquery.slides.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/shoppica.products_slide.js' %}"></script>
+  <!-- end of intro -->
 
-    {% for cat in categories %}
-        <p><a href="{% url 'products-list' cat.slug %}" >{{ cat.name }}</a></p>
 
-    {% endfor %}
+  <!-- ********************** -->
+  <!--      C O N T E N T     -->
+  <!-- ********************** -->
+  <div id="content" class="container_12">
+
+    <div id="welcome" class="grid_12">
+      <h2>Welcome to Shoppica store</h2>
+      <p> <a href="">Shoppica</a> is a stylish premium OpenCart theme (currently supported versions are 1.4.9.3/1.4.9.4). The clean and modern design allows you to use the theme for every kind of online shop: clothes, accessories, gifts, electronics, furniture, health and cosmetics store and so on.</p>
+      <p> One of the main features is to choose different types of slideshows for every category, so you can personalise every part of your store. Shoppica allows you to customize product listing size, column position and layout type, giving you the power to easy adapt the theme to your produc or service. With the color themer tool you can change site&#39;s elements and make your store unique and stand out of the crowd.</p>
+    </div>
+
+    <div class="clear"></div>
+
+    <div id="special_home" class="grid_12">
+      <h2 class="s_title_1"><span class="s_main_color">Избранные</span> Товары</h2>
+      <div class="clear"></div>
+      <div class="s_listing s_grid_view clearfix">
+        {% for product in products %}
+          <div class="s_item grid_2"> <a class="s_thumb" href="{% url 'product-details' product.id %}"><img src="{{ product.image.url }}" title="{{ product.name }}" alt="{{ product.name }}" /></a>
+          <h3><a href="product.html">{{ product.name }}</a></h3>
+          <p class="s_price">{{ product.price|floatformat:"1" }} сом</p>
+            <!--          <a class="s_button_add_to_cart" href="product.html"><span class="s_icon_16"><span class="s_icon"></span>Добавить в корзину</span></a>-->
+            {% include 'add_to_cart_form.html' with product=product cart_form=cart_form %}
+        </div>
+        {% endfor %}
+        <div class="clear"></div>
+      </div>
+    </div>
+
+    <div id="banners_1">
+      <div class="grid_3">
+        <a href="#" target="_blank">
+          <img src="{% static 'images/dummy/banner_4.jpg' %}">
+        </a>
+      </div>
+      <div class="grid_3">
+        <a href="#" target="_blank">
+          <img src="{% static 'images/dummy/banner_1.jpg' %}">
+        </a>
+      </div>
+      <div class="grid_3">
+        <a href="#" target="_blank">
+          <img src="{% static 'images/dummy/banner_2.jpg' %}">
+        </a>
+      </div>
+      <div class="grid_3">
+        <a href="#" target="_blank">
+          <img src="{% static 'images/dummy/banner_3.jpg' %}">
+        </a>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+
+  <!-- end of content -->
+
+  <!-- ********************** -->
+  <!--   S H O P   I N F O    -->
+  <!-- ********************** -->
+  <div id="shop_info">
+    <div id="shop_info_wrap">
+      <div class="container_12">
+        <div id="shop_description" class="grid_3">
+          <h2>Shoppica Theme</h2>
+          <p>Pellentesque a arcu ut nisi semper cursus. Nullam vehicula dapibus ultrices. Integer nunc risus, fringilla ut hendrerit a, dapibus vestibulum ante. In ullamcorper erat et orci mattis rutrum et a enim. Curabitur semper, erat sit amet condimentum volutpat, enim nisi auctor augue, id fringilla est dui non lectus. Cras in urna ante, sit amet dignissim orci. Proin nibh urna, consectetur vitae placerat luctus.</p>
+        </div>
+        <div id="shop_contacts" class="grid_3">
+          <h2>Contact Us</h2>
+          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td valign="middle"><span class="s_icon_32"><span class="s_icon s_phone_32"></span>5234452 <br /></span></td>
+            </tr>
+            <tr>
+              <td valign="middle"><span class="s_icon_32"><span class="s_icon s_fax_32"></span>5234452 <br /></span></td>
+            </tr>
+            <tr>
+              <td valign="middle"><span class="s_icon_32"><span class="s_icon s_mail_32"></span>pinko@example.com <br /> pinko@example.com</span></td>
+            </tr>
+            <tr>
+              <td valign="middle"><span class="s_icon_32"><span class="s_icon s_skype_32"></span>my_skype <br /> </span></td>
+            </tr>
+          </table>
+        </div>
+        <div id="twitter" class="grid_3">
+          <h2>Twitter</h2>
+          <ul id="twitter_update_list"><li></li></ul>
+          <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+          <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/themeburn.json?callback=twitterCallback2&amp;count=2"></script>
+        </div>
+        <div id="facebook" class="grid_3">
+          <h2>Facebook</h2>
+          <div class="s_widget_holder">
+            <fb:fan profileid="111188056908" stream="0" connections="6" logobar="0" width="220" css="http://svest.no-ip.org/test/opencart/catalog/view/theme/shoppica/stylesheet/facebook.css.php?300"></fb:fan>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <!-- end of shop info -->
 {% endblock body %}
+
