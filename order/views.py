@@ -40,5 +40,8 @@ class IncrementQuantityView(View):
         return redirect(reverse_lazy('cart-details'))
 
 
+class PlaceOrderView():
+    pass
+
 
 
