@@ -59,6 +59,11 @@ class Cart:
                 self.cart[product_id]['quantity'] += 1
                 self.save()
 
+    def clear(self):
+        del self.session['cart']
+        self.session.modified = True
+
+
 
 STATUS_CHOICES = (
     ('open', 'Открытый'),
@@ -73,6 +78,9 @@ class Order(models.Model):
     products = models.ManyToManyField(Product, through='OrderItems')
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    phone_number = models.CharField(max_length=20, blank=True)
+    address = models.CharField(max_length=50, blank=True)
+    total_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 
 class OrderItems(models.Model):
