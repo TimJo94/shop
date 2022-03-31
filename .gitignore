@@ -1,3 +1,4 @@
+shop/local_settings.py
 # created by virtualenv automatically
 
 .idea/
@@ -278,3 +279,4 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,django
 .DS_Store
+
