@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Корзина{% endblock title %}
+{% block title %}Basket{% endblock title %}
 
 {% block body %}
   <!-- ********************** -->
@@ -11,10 +11,10 @@
     <div id="intro_wrap">
       <div class="container_12">
         <div id="breadcrumbs" class="grid_12">
-          <a href="{% url 'index' %}">Главная</a>
-           &gt; <a href="{% url 'cart-details' %}">Корзина</a>
+          <a href="{% url 'index' %}">Home</a>
+           &gt; <a href="{% url 'cart-details' %}">Basket</a>
         </div>
-        <h1>Ваша корзина:</h1>
+        <h1>Your shopping basket:</h1>
       </div>
     </div>
   </div>
@@ -31,12 +31,12 @@
         <table class="s_table_1" width="100%" cellpadding="0" cellspacing="0" border="0">
           <thead>
             <tr>
-            <th width="60">Изображение</th>
-            <th width="320">Наименование</th>
-            <th>Цена за единицу</th>
-            <th>Количество</th>
-            <th>Сумма</th>
-            <th width="65">Удалить</th>
+            <th width="60">Image</th>
+            <th width="320">Name</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th width="65">Delete</th>
           </tr>
           </thead>
           <tbody>

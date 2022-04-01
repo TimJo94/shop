@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Оформление заказа{% endblock title %}
+{% block title %}Checkout{% endblock title %}
 
 {% block body %}
 <!-- ********************** -->
@@ -12,11 +12,11 @@
     <div id="intro_wrap">
       <div class="container_12">
         <div id="breadcrumbs" class="grid_12">
-          <a href="">Главная</a>
+          <a href="">Home</a>
           &gt;
-          <a href="">Оформление заказа</a>
+          <a href="">Checkout</a>
         </div>
-        <h1>Оформление заказа</h1>
+        <h1>Checkout</h1>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
         <h2>Billing details</h2>
         <div>
           <div class="grid_6 alpha">
-            <h3><span class="s_secondary_color">Ваши</span> контакты</h3>
+            <h3><span class="s_secondary_color">Your</span> contacts</h3>
             <form method="post">
               {% csrf_token %}
               <div class="s_row_2 clearfix">
@@ -49,14 +49,14 @@
             </form>
           </div>
           <div class="grid_6 omega">
-            <h3><span class="s_secondary_color">Ваш</span> Заказ</h3>
+            <h3><span class="s_secondary_color">Your</span> Order</h3>
         <table class="s_table_1" width="100%" cellpadding="0" cellspacing="0" border="0">
           <thead>
             <tr>
-            <th width="320">Наименование</th>
-            <th>Цена за единицу</th>
-            <th>Количество</th>
-            <th>Сумма</th>
+            <th width="320">Name</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+            <th>Total</th>
           </tr>
           </thead>
           <tbody>
