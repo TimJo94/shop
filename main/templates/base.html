@@ -23,11 +23,10 @@
   <!-- ********************** -->
   <div id="header" class="container_12">
     <div class="grid_12">
-    	<a id="Nomad Land" href="index.html">NOMAD LAND store</a>
+
       <div id="system_navigation" class="s_nav">
         <ul class="s_list_1 clearfix">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'cart-details' %}">Basket</a></li>
           {% if not user.is_authenticated %}x
           <li><a href="{% url 'signin' %}">Сome in</a></li>
           <li><a href="{% url 'registration' %}">Register</a></li>
@@ -38,7 +37,13 @@
       </div>
 
       <div id="site_search">
-      	<a id="show_search" href="javascript:;" title="Search:"></a>
+<!--      	<a id="show_search" href="javascript:;" title="Search:"></a>-->
+        <!-- Search -->
+          <section id="search" class="alt">
+              <form method="get" action="{% url 'search-results' %}">
+                  <input type="text" name="q" id="query" placeholder="Search" />
+              </form>
+          </section>
         <div id="search_bar" class="clearfix">
           <input type="text" id="filter_keyword" />
           <select id="filter_category_id">
@@ -52,7 +57,7 @@
 
       <div id="categories" class="s_nav">
         <ul>
-          <li id="menu_home"> <a href="index.html">Home</a> </li>
+          <li id="menu_home"> <a href="{% url 'index' %}">Home</a> </li>
           {% for cat in categories %}
             <li>
               <a href="{% url 'products-list' cat.slug %}">{{ cat.name }}</a>
@@ -61,8 +66,10 @@
         </ul>
       </div>
 
+
+
       <div id="cart_menu" class="s_nav">
-      	<a href="cart.html"><span class="s_icon"></span> <small class="s_text">Cart</small><span class="s_grand_total s_main_color">$0.00</span></a>
+      	<a href="{% url 'cart-details' %}"><span class="s_icon"></span> <small class="s_text"></small><span class="s_grand_total s_main_color">{{ cart.get_cart_total }} сом</span></a>
         <div class="s_submenu s_cart_holder">
           <p class="s_mb_0">0 items</p>
         </div>
