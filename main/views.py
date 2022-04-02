@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.paginator import Paginator, InvalidPage
+from django.core.paginator import Paginator, InvalidPage, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -8,11 +8,11 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 
 from .models import Product, Category
-from .forms import CreateProductForm, UpdateProductForm
+from .forms import CreateProductForm, UpdateProductForm, CommentForm
 
 
 def index_page(request):
-    products = Product.objects.all()[:6]
+    products = Product.objects.all()[:5]
     return render(request, 'main/index.html', {'products': products})
 
 
@@ -98,14 +98,47 @@ class SearchResultsView(ListView):
         # select * from product where name ilike'%q%' OR description ilike '%q%';
         return queryset
 
-
-# class ProductsListView(ListView):
-#     queryset = Product.objects.all()
-#     template_name = 'main/products_list.html'
-
-
 # TODO: фильтрация, поиск, пагинация
 # TODO: заказы
 # TODO: отправка писем
 # TODO: деплой
 # TODO: верстка
+
+
+# def post_detail(request, slug):
+#     template_name = 'add_comment_to_post.html'
+#     post = get_object_or_404(Product, slug=slug)
+#     comments = post.comments.filter(active=True)
+#     new_comment = None
+#     # Comment posted
+#     if request.method == 'POST':
+#         comment_form = CommentForm(data=request.POST)
+#         if comment_form.is_valid():
+#
+#             # Create Comment object but don't save to database yet
+#             new_comment = comment_form.save(commit=False)
+#             # Assign the current post to the comment
+#             new_comment.post = post
+#             # Save the comment to the database
+#             new_comment.save()
+#     else:
+#         comment_form = CommentForm()
+#
+#     return render(request, template_name, {'post': post,
+#                                            'comments': comments,
+#                                            'new_comment': new_comment,
+#                                            'comment_form': comment_form})
+
+
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Product, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('product-details', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})

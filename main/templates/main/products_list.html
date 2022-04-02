@@ -31,21 +31,6 @@
     <div id="category" class="grid_12">
 
       
-      <div id="listing_options">
-        <div id="listing_sort" class="s_switcher">
-          <span class="s_selected">Default</span>
-          <ul class="s_options" style="display: none;">
-            <li><a href="">Name A - Z</a></li>
-            <li><a href="">Name Z - A</a></li>
-            <li><a href="">Price Low &gt; High</a></li>
-            <li><a href="">Price High &gt; Low</a></li>
-            <li><a href="">Rating Highest</a></li>
-            <li><a href="">Rating Lowest</a></li>
-            <li><a href="">Model A - Z</a></li>
-            <li><a href="">Model Z - A</a></li>
-          </ul>
-        </div>
-      </div>
 
       <div class="clear"></div>
 
@@ -63,12 +48,39 @@
 
         <div class="clear"></div>
       {% endfor %}
+      </div>
 
-      </div>
-      
-      <div class="pagination">
-        <div class="results">Showing 1 to 6 of 6 (1 Pages)</div>
-      </div>
+<div class="pagination">
+  <div class="results">
+<li class="page-item"><a class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+<li class="page-item active" aria-current="page">
+</li>
+{% if page_obj.has_next %}
+<li class="page-item">
+<a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+{% endif %}
+</li>
+    </div>
+</div>
+
+<!--<div class="pagination">-->
+<!--  <div class="results">Showing 1 to 6 of 6 (1 Pages)-->
+<!--        <nav aria-label="...">-->
+<!--            <ul class="pagination pagination-sm">-->
+<!--                {% if page_obj.has_previous %}-->
+
+<!--                <li class="page-item"><a class="page-link" href="{% url 'index' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>-->
+<!--                {% endif %}-->
+<!--                <li class="page-item active" aria-current="page">-->
+<!--                <span class="page-link">{{ page_obj.number }}</span>-->
+<!--                </li>-->
+<!--                {% if page_obj.has_next %}-->
+<!--                <li class="page-item"><a class="page-link" href="{% url 'index' %}?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>-->
+<!--                {% endif %}-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
+<!--</div>-->
       
     </div>
     
@@ -80,52 +92,12 @@
         </div>
       </div>
       
-      <div id="categories_module" class="s_box">
-        <h2>Categories</h2>
-        <div class="s_list_1">
-          <ul>
-          	<li><a href="listing_1.html">Clothing</a></li>
-            <li><a href="listing_1.html">Shoes</a></li>
-            <li><a href="listing_1.html">Gifts</a></li>
-            <li><a href="listing_1.html">At home</a></li>
-            <li><a href="listing_1.html">Health</a></li>
-            <li><a href="listing_1.html">Jewellery</a></li>
-            <li><a href="listing_1.html">Books</a></li>
-          </ul>
-      	</div>
-      </div>
-      
-    	<div id="brands_module" class="s_box">
-        <h2>Brands</h2>
-        <select onchange="location = this.value">
-          <option> --- Please Select --- </option>
-          <option>Tumar</option>
-          <option>Keldike</option>
-           <option>Chokoychu</option>
-           <option>Сhukoland</option>
-           <option>Ecomade</option>
-           <option>ЕthnoKG</option>
-           <option>Oymo</option>
-           <option>Dilbar</option>
-           <option>Bagira</option>
-           <option>Ulusha Zhol</option>
-          <option>Ilbirs</option>
-          <option>Alexsandra</option>
-          <option>Ulusha Zhol </option>
 
-        </select>
-        </div>
       
 
-        <h2>Information</h2>
-        <ul class="s_list_1">
-          <li><a href="static.html">About Nomad Shop</a></li>
-          <li><a href="static.html">Privacy Policy</a></li>
-          <li><a href="static.html">Terms &amp; Conditions</a></li>
-          <li><a href="contacts.html">Contact Us</a></li>
-          <li><a href="sitemap.html">Site Map</a></li>
-        </ul>
-    </div>
-  </div>
+
+
+
+
   <!-- end of content -->
 {% endblock body %}

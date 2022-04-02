@@ -28,7 +28,7 @@
         <ul class="s_list_1 clearfix">
           <li><a href="{% url 'index' %}">Home</a></li>
           {% if not user.is_authenticated %}x
-          <li><a href="{% url 'signin' %}">Сome in</a></li>
+          <li><a href="{% url 'signin' %}">Log in</a></li>
           <li><a href="{% url 'registration' %}">Register</a></li>
           {% else %}
           <li><a href="{% url 'signout' %}">Go out</a></li>
@@ -69,7 +69,7 @@
 
 
       <div id="cart_menu" class="s_nav">
-      	<a href="{% url 'cart-details' %}"><span class="s_icon"></span> <small class="s_text"></small><span class="s_grand_total s_main_color">{{ cart.get_cart_total }} сом</span></a>
+      	<a href="{% url 'cart-details' %}"><span class="s_icon"></span> <small class="s_text"></small><span class="s_grand_total s_main_color">{{ cart.get_cart_total }}</span></a>
         <div class="s_submenu s_cart_holder">
           <p class="s_mb_0">0 items</p>
         </div>

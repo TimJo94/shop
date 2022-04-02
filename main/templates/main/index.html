@@ -35,12 +35,12 @@ A wide range also includes original gifts for all occasions. Order with delivery
     <div class="clear"></div>
 
     <div id="special_home" class="grid_12">
-      <h2 class="s_title_1"><span class="s_main_color">Preferred Goods</span></h2>
+      <h2 class="s_title_1"><span class="s_main_color">Featured Goods</span></h2>
       <div class="clear"></div>
       <div class="s_listing s_grid_view clearfix">
         {% for product in products %}
           <div class="s_item grid_2"> <a class="s_thumb" href="{% url 'product-details' product.id %}"><img src="{{ product.image.url }}" title="{{ product.name }}" alt="{{ product.name }}" /></a>
-          <h3><a href="product.html">{{ product.name }}</a></h3>
+          <h3><a href="{% url 'product-details' product.id %}">{{ product.name }}</a></h3>
           <p class="s_price">{{ product.price|floatformat:"1" }} сом</p>
             <!--          <a class="s_button_add_to_cart" href="product.html"><span class="s_icon_16"><span class="s_icon"></span>Добавить в корзину</span></a>-->
             {% include 'add_to_cart_form.html' with product=product cart_form=cart_form %}

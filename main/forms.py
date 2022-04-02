@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Comment
 
 
 class CreateProductForm(forms.ModelForm):
@@ -16,4 +16,7 @@ class UpdateProductForm(forms.ModelForm):
         fields = '__all__'
 
 
-
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('__all__')

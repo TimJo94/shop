@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from main import views
 from main.views import index_page, ProductsListView, ProductDetailsView
 
 from django.conf import settings
@@ -27,6 +29,7 @@ urlpatterns = [
     path('accounts/', include('account.urls')),
     path('products/', include('main.urls')),
     path('', include('order.urls')),
+    path('product/details/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
 ]
 
 if settings.DEBUG:

@@ -40,6 +40,8 @@ class SignInView(LoginView):
     template_name = 'account/login.html'
 
 
+
+
 class ChangePasswordView(View):
     def post(self, request):
         pass

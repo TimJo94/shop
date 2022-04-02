@@ -15,18 +15,7 @@
       </div>
       <div id="product_info" class="grid_6 omega">
         <p class="s_price">{{ product.price|floatformat:"0g" }}<span class="s_currency s_after"> сом</span></p>
-        <dl class="clearfix">
-          <dt>Availability</dt>
-          <dd>In Stock</dd>
-          <dt>Model</dt>
-          <dd>Product 4</dd>
-          <dt>Manufacturer</dt>
-          <dd><a href="#">Canon</a></dd>
-          <dt>Average Rating</dt>
-          <dd>
-            <p class="s_rating s_rating_5"><span style="width: 100%;" class="s_percent"></span></p>
-          </dd>
-        </dl>
+
         <div id="product_share" class="clearfix">
           <!-- AddThis Button BEGIN -->
           <div class="addthis_toolbox addthis_default_style ">
@@ -45,13 +34,14 @@
       <div class="s_tabs grid_12 alpha omega">
         <ul class="s_tabs_nav clearfix">
           <li><a href="#product_description">Description</a></li>
-          <li><a href="url 'product_reviews' product.id">Reviews</a></li>
-          <li><a href="#product_gallery">Photos (2)</a></li>
+          <li><a href="{% url 'add_comment_to_post' product.id %}">Comments</a></li>
+          <li><a href="#product_gallery">Photos</a></li>
         </ul>
         <div class="s_tab_box">
           <div id="product_description">
             <div class="cpt_product_description ">
                 {{ product.description }}
+
             </div>
             <!-- cpt_container_end -->
           </div>
@@ -65,37 +55,6 @@
 
     
     <div id="right_col" class="grid_3">
-      
-      <div id="categories_module" class="s_box">
-        <h2>Categories</h2>
-        <div class="s_list_1">
-          <ul>
-            <li><a href="listing_1.html">National clothes</a></li>
-            <li><a href="listing_1.html">Headdress</a></li>
-            <li><a href="listing_1.html">Accessories</a></li>
-            <li><a href="listing_1.html">Leather products</a></li>
-            <li><a href="listing_1.html">Felt products</a></li>
-            <li><a href="listing_1.html">Wood products</a></li>
-            <li><a href="listing_1.html">Shoes</a></li>
-            <li><a href="listing_1.html">Gifts</a></li>
-            <li><a href="listing_1.html">At home</a></li>
-            <li><a href="listing_1.html">Health</a></li>
-            <li><a href="listing_1.html">Books</a></li>
-          </ul>
-      	</div>
-			</div>
-    
-      <div id="information_module" class="s_box">
-        <h2>Information</h2>
-        <ul class="s_list_1">
-          <li><a href="static.html">About Shoppica</a></li>
-          <li><a href="static.html">Privacy Policy</a></li>
-          <li><a href="static.html">Terms &amp; Conditions</a></li>
-          <li><a href="contacts.html">Contact Us</a></li>
-          <li><a href="sitemap.html">Site Map</a></li>
-        </ul>
-      </div>
-
 
     </div>
     
